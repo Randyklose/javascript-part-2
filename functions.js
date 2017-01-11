@@ -23,12 +23,23 @@ var array =[
     ];
  // longest name   
 console.log(array.sort(function(a, b)
-{return b.name.length - a.name.length}));
+{
+    return b.name.length - a.name.length
+    
+}));
 
 //email alphabetical order
 
 console.log(array.sort(function(a, b)
-{return b.email < a.email}));
+{  
+    if ( a.email < b.email) { // ascending if smaller.
+        return -1;
+    }
+    if (a.email > b.email ) {// descending if bigger.
+        return 1;
+    }
+    return 0; // do nothing if they are the same.
+}));
 
 /*Create a function that can be used with Array.prototype.map. 
 This function should take a number and return its square.
@@ -42,9 +53,23 @@ function square(x) {
 
 console.log(array.map(square));
 
-/*Create a function that can be used with Array.prototype.map. This function should be able to take an object and square its “num” property. Then, use this function with map on an array of objects each containming a “num” property.
+/*Create a function that can be used with Array.prototype.map.
+This function should be able to take an object and square its “num” property.
+Then, use this function with map on an array of objects each containming a “num” property.*/
 
-In a previous workshop, you had to create a function that took two numbers and an operation (add, sub, mult, …) and returned the result of the operation on the two numbers. Here we are going to do the same but at a higher order. Create a function called operationMaker that takes only a string called operation as argument. This string could be “add”, “subtract”, “mult” or “div”. Your function will return a function that will take two numbers and return the result of running operation on these numbers. The end result should let me do something like this:
+var array =[ 
+    {num:2},
+    {num:4},
+    {num:6},
+    {num:8}
+    ] ;
+    
+    console.log(array.map(function(x){
+        return x.num * x.num;
+    }));
+
+
+/*In a previous workshop, you had to create a function that took two numbers and an operation (add, sub, mult, …) and returned the result of the operation on the two numbers. Here we are going to do the same but at a higher order. Create a function called operationMaker that takes only a string called operation as argument. This string could be “add”, “subtract”, “mult” or “div”. Your function will return a function that will take two numbers and return the result of running operation on these numbers. The end result should let me do something like this:
 
 
 var adder = operationMaker(“add”); var sum = adder(5, 10); //15
