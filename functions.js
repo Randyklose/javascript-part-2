@@ -69,17 +69,46 @@ var array =[
     }));
 
 
-/*In a previous workshop, you had to create a function that took two numbers and an operation (add, sub, mult, …) and returned the result of the operation on the two numbers. Here we are going to do the same but at a higher order. Create a function called operationMaker that takes only a string called operation as argument. This string could be “add”, “subtract”, “mult” or “div”. Your function will return a function that will take two numbers and return the result of running operation on these numbers. The end result should let me do something like this:
-
+/*In a previous workshop, you had to create a function that took two numbers
+and an operation (add, sub, mult, …) and returned the result of the operation
+on the two numbers. Here we are going to do the same but at a higher order.
+Create a function called operationMaker that takes only a string
+called operation as argument.
+This string could be “add”, “subtract”, “mult” or “div”.
+Your function will return a function that will take two numbers
+and return the result of running operation on these numbers. 
+The end result should let me do something like this:
 
 var adder = operationMaker(“add”); var sum = adder(5, 10); //15
+var mult = operationMaker(“mult”); var product = mult(5, 10); // 50 */
 
-var mult = operationMaker(“mult”); var product = mult(5, 10); // 50
+function operationMaker(operation) {
+    switch (operation){
+        case "add":
+            return function(a, b){
+               return a + b;
+            };
+        case "subtract":
+            return function(a, b){
+               return  a - b;
+            };
+        case "mult":
+            return function(a, b){
+              return  a * b;
+            };
+        case "div":
+            return function(a, b){
+                return a/b;
+            };
+    }
+}
 
+var adder = operationMaker("add"); var sum = adder(5, 10);
+var mult = operationMaker("mult"); var product = mult(5, 10);
 
-* Once you are finished, commit and push your changes. Then, create a pull request so we can start checking your work.
-
-Objects
+console.log(sum);
+console.log(product);
+/*Objects
 -------
 
 ## Warriors!
