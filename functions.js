@@ -7,17 +7,42 @@ var arr= ["randy", "dog", "cat", "chocolate", "flower"];
 
 function longestWord(str1, str2) {
      return str2.length - str1.length;
-     
 }
 console.log(arr.sort(longestWord));
 
 
+/*Create an array of objects (don’t need to use new here, just regular object literals).
+These objects will contain a name and email property.
+Then, run some code that will sort your array by the longest name.
+Then, run some code that will sort your array by e-mail address in alphabetical order.*/
 
-/*Create an array of objects (don’t need to use new here, just regular object literals). These objects will contain a name and email property. Then, run some code that will sort your array by the longest name. Then, run some code that will sort your array by e-mail address in alphabetical order.
+var array =[
+     {name:"randy", email:"randy@something.com"},
+     {name:"nathan", email:"nathan@something.com"},
+     {name:"bob", email:"bob@something.com"}
+    ];
+ // longest name   
+console.log(array.sort(function(a, b)
+{return b.name.length - a.name.length}));
 
-Create a function that can be used with Array.prototype.map. This function should take a number and return its square. Then, use this function with map on an array of numbers to check the result.
+//email alphabetical order
 
-Create a function that can be used with Array.prototype.map. This function should be able to take an object and square its “num” property. Then, use this function with map on an array of objects each containming a “num” property.
+console.log(array.sort(function(a, b)
+{return b.email < a.email}));
+
+/*Create a function that can be used with Array.prototype.map. 
+This function should take a number and return its square.
+Then, use this function with map on an array of numbers to check the result.*/
+
+var array=[2, 4, 6, 8];
+
+function square(x) {
+    return x*x;
+}
+
+console.log(array.map(square));
+
+/*Create a function that can be used with Array.prototype.map. This function should be able to take an object and square its “num” property. Then, use this function with map on an array of objects each containming a “num” property.
 
 In a previous workshop, you had to create a function that took two numbers and an operation (add, sub, mult, …) and returned the result of the operation on the two numbers. Here we are going to do the same but at a higher order. Create a function called operationMaker that takes only a string called operation as argument. This string could be “add”, “subtract”, “mult” or “div”. Your function will return a function that will take two numbers and return the result of running operation on these numbers. The end result should let me do something like this:
 
