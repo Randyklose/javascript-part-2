@@ -60,9 +60,12 @@ To do this exercise, let's follow these steps:
     */
   
   function Tile(type) {
-        this.type= type;
+    this.type= type;
           
-      this.isWalkable= function () {
+  };
+  
+  Tile.prototype.isWalkable =function () {
+          
           if (this.type == "grass" || this.type == "sand") {
               return true;
           }
@@ -70,18 +73,19 @@ To do this exercise, let's follow these steps:
               return false;
           }
       };
-      
-  };
-  
   function Map(width, height) {
       this.width= width;
       this.height= height;
       this.tiles=[];
-      for (var i=0; i< height; i++){
+      for (var i= 0; i< height; i++){
+          
         var tempArray=[];
-          for (var j=0; j<width; j++){
-              var random= Math.random() *3;
+        
+          for (var j= 0; j< width; j++){
+              
+              var random = 3 * Math.random();
               var typeOfTerrain;
+              
           if (random < 1){
               typeOfTerrain = "grass";
           }
@@ -91,7 +95,6 @@ To do this exercise, let's follow these steps:
           else {
               typeOfTerrain= "water";
           }
-      
               var newTile = new Tile(typeOfTerrain);
               tempArray.push(newTile);
           }
@@ -100,32 +103,50 @@ To do this exercise, let's follow these steps:
      
   };
   
-  Map.prototype.getWalkableOutput= function() {this.tiles.map(function(){
-    if (this.isWalkable === true) {
-        console.log("0");
-    }
-    else{
-        console.log("X");
-    }
-        
-    });
+  Map.prototype.getWalkableOutput= function() {
+      
+      var test =''
+      
+      for( var i=0; i< this.tiles.length; i++) {
+          
+          test+= this.tiles[i].reduce(function(accumulator, currentTile){
+             
+              if (currentTile.isWalkable()) {
+                  accumulator += "0";
+              }
+              else {
+                  accumulator += "X";
+              }
+               return accumulator;
+          }, "" )
+          test+="\n";
+      }
+      return test;
   }
     
-    Map.prototype.getAsciiOutput= function() {this.tiles.map(function() {
-    
-        if( this.type == "grass") {
-            console.log("*");
+    Map.prototype.getAsciiOutput= function() {
+        var temp= ""
+        for( var i=0; i< this.tiles.length; i++) {
+          
+          temp+= this.tiles[i].reduce(function(accumulator, currentTile){
+       
+        if( currentTile.type === "grass") {
+            accumulator +="*";
         }
-        else if(this.type == "sand") {
-            console.log(":");
+        else if(currentTile.type === "sand") {
+            accumulator +=":";
         }
         else {
-            console.log("~");
+            accumulator +="~";
         }
-    });
-  };
- 
- var newMap= new Map(4, 4);
+        return accumulator;
+    }, "");
+    temp +="\n";
+  }
+        return temp;
+}
+
+var newMap= new Map(4, 4);
  
 console.log(newMap);
 console.log(newMap.getWalkableOutput());
